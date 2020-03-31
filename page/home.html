@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浅浅小帅比的个人博客</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.js"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="./home.html" class="title">浅三好 的个人博客 | 技术博客</a>
+            <ul class="menu">
+                <li>
+                    <a href="./home.html">首页</a>
+                </li>
+                <li>
+                    <a href="./siteMap.html">目录</a>
+                </li>
+                <li>
+                    <a href="./about.html">关于</a>
+                </li>
+                <li>
+                    <a href="./guestBook.html">留言</a>
+                </li>
+            </ul>
+            <!-- <div class="search_bar">
+                <input type="text" placeholder="输入关键词查找">
+                <button>搜索</button>
+            </div> -->
+        </div>
+    </header>
+    <div class="content">
+        <div class="content_left">
+            <div class="every_day" id="every_day">
+                <span>每日一句</span>
+                <p v-html='getContent'></p>
+            </div>
+            <div class="article_list" id="article_list">
+                <div class="article" v-for='article in articleList'>
+                    <a :href="article.link" class="article_title">{{article.title}}</a>
+                    <p class="article_content"> {{article.content}} </p>
+                    <div class="article_foot">发布于{{article.date}} | 浏览（{{article.views}}）| tags： {{article.tags}}</div>
+                </div>
+                <div class="page_tool">
+                    <ul>
+                        <li v-for='pageNum in pageNumList'
+                        v-on:click='jumpTo(pageNum.page)'
+                        :class='{now_page: (pageNum.text == page)}'
+                        >{{pageNum.text}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content_right">
+            <div class="right_modle" id="random_tags">
+                <div>随机标签云</div>
+                <div class="random">
+                    <a 
+                    v-for='tag in tags'
+                    :href='tag.link'
+                    :style='{color: randomColor(), fontSize:randomSize()}'
+                    >{{tag.text}}</a>
+                </div>
+
+            </div>
+            <div class="right_modle" id="new_hot">
+                <div>最近热门</div>
+                <ul>
+                    <li v-for='temp in titleList'><a :href="temp.link">{{temp.title}}</a></li>
+                </ul>
+            </div>
+            <div class="right_modle" id="new_comment">
+                <div>最新评论</div>
+                <ul>
+                    <li v-for='comment in commentList'>
+                        <div>
+                            <span>{{comment.name}}</span>
+                            <span class="pull_right">{{comment.date}}</span>
+                        </div>
+                        <a :href="comment.link">{{comment.comment}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <ul>
+            <li>Lorem, ipsum dolor.</li>
+            <li>Ab, ea nostrum!</li>
+            <li>Dicta, numquam quis.</li>
+            <li>Soluta, ad explicabo.</li>
+            <li>Eaque, quidem dolore.</li>
+            <li>Sapiente, dolores esse?</li>
+            <li>Recusandae, labore aliquam.</li>
+        </ul>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae ipsa perferendis consequuntur.
+        </p>
+    </footer>
+
+    <script src="./js/index.js"></script>
+    <script src="./js/base.js"></script>
+
+</html>

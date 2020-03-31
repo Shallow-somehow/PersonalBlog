@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑每日一句</title>
+    <script src="./wangEditor/wangEditor.js"></script>
+    <script src="./js/jquery.js"></script>
+    <link href="./wangEditor/wangEditor.css">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background: #fde3A7;
+        }
+
+
+        .edit_blog {
+            position: relative;
+            display: block;
+            width: 1000px;
+            margin: 0px auto 0px auto;
+        }
+
+        h1 {
+            margin: 20px 0px 20px 0px;
+        }
+
+        input {
+            width: 200px;
+            height: 30px;
+            font-size: 20px;
+            padding: 3px 10px 3px 10px;
+            border-radius: 5px;
+            margin: 0px 0px 20px 0px;
+
+        }
+
+        button {
+            position: relative;
+            display: block;
+            height: 50px;
+            width: 500px;
+            line-height: 50px;
+            text-align: center;
+            background: #1e88e5;
+            color: white;
+            font-size: 24px;
+            border-radius: 8px;
+            margin: 20px 0px 0px 0px;
+        }
+
+        textarea {
+            width: 500px;
+            height: 300px;
+            font-size: 16px;
+            padding: 15px 0 0 15px ;
+            border-radius: 5px;
+            background-color: #d9edf7;
+        }
+    </style>
+    <script>
+        function submit() {
+            var content = $('#content').val()
+            $.ajax({
+                url: '/editEveryDay',
+                method: 'post',
+                data: content,
+                success: function (resp) {
+                    var result = JSON.parse(resp);
+                    alert(result.msg);
+                    $('editor').html('');
+                },
+                error: function (resp) {
+                    console.log(resp)
+                }
+            })
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="edit_blog">
+        <h1>编辑每日一句</h1>
+        <textarea placeholder="请输入每日一句" id="content"></textarea>
+        <button onclick="submit()">提交</button>
+    </div>
+</body>
+
+</html>
